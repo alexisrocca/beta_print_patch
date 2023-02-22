@@ -64,7 +64,7 @@ frappe.ui.form.PrintView = class {
 	setup_toolbar() {
 		this.page.set_primary_action(__("Print"), () => this.printit(), "printer");
 
-		this.page.add_button(__("Full Page"), () => this.render_page("/printview?"), {
+		this.page.add_button(__("Full Page"), () => this.fullpage(), {
 			icon: "full-page",
 		});
 
@@ -566,9 +566,9 @@ frappe.ui.form.PrintView = class {
 			);
 			me.printer_setting_dialog();
 		} else if (print_format.print_format_builder_beta){
-			me.render_page("/printpreview", true);
+			me.render_page("/printpreview?", true);
 		} else {
-			me.render_page("/printview", true);
+			me.render_page("/printview?", true);
 		}
 	}
 
@@ -641,7 +641,7 @@ frappe.ui.form.PrintView = class {
 
 	render_page(method, printit = false) {
 		let print_format = this.get_print_format();
-		if (method === "/printpreview") {
+		if (method === "/printpreview?") {
 			let w = window.open(
 				frappe.urllib.get_full_url(
 					method +
@@ -661,7 +661,7 @@ frappe.ui.form.PrintView = class {
 						(this.lang_code ? "&_lang=" + this.lang_code : "")
 				)
 			);
-		} if (method === "/printview") {
+		} if (method === "/printview?") {
 			let w = window.open(
 				frappe.urllib.get_full_url(
 					method +
@@ -686,6 +686,16 @@ frappe.ui.form.PrintView = class {
 			frappe.msgprint(__("Please enable pop-ups"));
 			return;
 		}
+	}
+	
+	fullpage() {
+		let print_format = this.get_print_format();
+		if (print_format.print_format_builder_beta){
+			this.render_page("/printpreview?");
+		} else {
+			this.render_page("/printview?");
+		}
+
 	}
 
 	get_print_html(callback) {
