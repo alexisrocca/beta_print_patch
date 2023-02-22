@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include beta_print_patch *.css
+recursive-include beta_print_patch *.csv
+recursive-include beta_print_patch *.html
+recursive-include beta_print_patch *.ico
+recursive-include beta_print_patch *.js
+recursive-include beta_print_patch *.json
+recursive-include beta_print_patch *.md
+recursive-include beta_print_patch *.png
+recursive-include beta_print_patch *.py
+recursive-include beta_print_patch *.svg
+recursive-include beta_print_patch *.txt
+recursive-exclude beta_print_patch *.pyc
