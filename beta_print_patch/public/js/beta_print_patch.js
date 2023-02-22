@@ -440,7 +440,7 @@ frappe.ui.form.PrintView = class {
 		if (letterhead) {
 			params.append("letterhead", letterhead);
 		}
-		iframe.prop("src", `/printpreview?${params.toString()}`);
+		iframe.prop("src", `/printpreview_patched?${params.toString()}`);
 	}
 
 	setup_print_format_dom(out, $print_format) {
@@ -566,7 +566,7 @@ frappe.ui.form.PrintView = class {
 			);
 			me.printer_setting_dialog();
 		} else if (print_format.print_format_builder_beta){
-			me.render_page("/printpreview?", true);
+			me.render_page("/printpreview_patched?", true);
 		} else {
 			me.render_page("/printview?", true);
 		}
@@ -641,7 +641,7 @@ frappe.ui.form.PrintView = class {
 
 	render_page(method, printit = false) {
 		let print_format = this.get_print_format();
-		if (method === "/printpreview?") {
+		if (method === "/printpreview_patched?") {
 			let w = window.open(
 				frappe.urllib.get_full_url(
 					method +
@@ -691,7 +691,7 @@ frappe.ui.form.PrintView = class {
 	fullpage() {
 		let print_format = this.get_print_format();
 		if (print_format.print_format_builder_beta){
-			this.render_page("/printpreview?");
+			this.render_page("/printpreview_patched?");
 		} else {
 			this.render_page("/printview?");
 		}
